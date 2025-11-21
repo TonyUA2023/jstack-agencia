@@ -258,4 +258,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 @include('public.partials.services')
+@include('public.partials.cards')
+@include('public.partials.contact')
 @endsection

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="scroll-smooth">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -29,7 +29,7 @@
 
     {{-- Fuentes + Tailwind --}}
     <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600,700&display=swap" rel="stylesheet" />
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     @stack('head')
@@ -39,15 +39,11 @@
 
     {{-- 
         ========== HEADER PÚBLICO (FIXED) ========== 
-        Cambios: 
-        1. 'sticky' -> 'fixed' (Para que flote y no ocupe espacio)
-        2. Added 'w-full' (Para que ocupe todo el ancho al ser fixed)
-        3. transition-all duration-300 (Opcional: por si quieres animar el fondo luego con JS)
     --}}
     <header class="fixed top-0 w-full z-50 border-b border-white/5 bg-slate-950/80 backdrop-blur-md transition-all duration-300">
         <nav class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
             {{-- Logo + Marca --}}
-            <a href="{{ route('home') }}" class="flex items-center gap-3">
+            <a href="{{ route('home') }}" class="flex items-center gap-3 group">
                 <img
                     src="{{ asset('images/jstack-logo-dark.png') }}"
                     alt="Jstack logo"
@@ -60,7 +56,7 @@
                 >
 
                 <div class="flex flex-col leading-tight">
-                    <span class="text-sm font-semibold tracking-tight text-white">
+                    <span class="text-sm font-semibold tracking-tight text-white group-hover:text-sky-400 transition">
                         {{ __('layout.brand') }}
                     </span>
                     <span class="text-[11px] text-slate-400">
@@ -116,17 +112,17 @@
     </header>
 
     {{-- 
-        ========== CONTENIDO PÚBLICO ========== 
-        Nota: Como el header es 'fixed', el contenido empezará DETRÁS del header.
-        Asegúrate de que tus secciones internas tengan padding-top si lo necesitan,
-        o que sean secciones tipo "Hero" a pantalla completa.
+        ========== CONTENIDO PÚBLICO (FULL WIDTH FIX) ========== 
+        CAMBIO: Se eliminó 'max-w-7xl px-4' y se reemplazó por 'w-full relative'.
+        Esto permite que secciones como "Servicios" toquen los bordes de la pantalla.
+        Las secciones internas deberán usar su propio 'container mx-auto' si necesitan márgenes.
     --}}
-    <main class="mx-auto max-w-7xl px-4">
+    <main class="w-full relative">
         @yield('content')
     </main>
 
     {{-- ========== FOOTER PÚBLICO ========== --}}
-    <footer class="border-t border-white/10 bg-black/90 mt-auto">
+    <footer class="border-t border-white/10 bg-black/90 mt-auto relative z-10">
         <div class="mx-auto flex max-w-7xl flex-col gap-6 px-4 py-8 md:flex-row md:items-center md:justify-between">
 
             <div class="flex items-center gap-3">
