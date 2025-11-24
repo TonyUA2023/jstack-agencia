@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\App;
 // Landing pública
 Route::view('/', 'public.home')->name('home');
 
+Route::view('/about', 'public.about')->name('about');
+Route::view('/services', 'public.services')->name('services');
 // Cambio de idioma
 Route::get('/set-locale/{locale}', function (string $locale) {
     if (! in_array($locale, ['es', 'en'])) {
